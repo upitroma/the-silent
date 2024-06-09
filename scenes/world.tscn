@@ -1,9 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://becibbnb3chm1"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ngg5l"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0sk7"]
-albedo_color = Color(0.156969, 0.0715724, 0.07713, 1)
+[ext_resource type="PackedScene" uid="uid://bb8f8larc7wjw" path="res://prefabs/lamp.tscn" id="2_ol827"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_paptp"]
 sky_top_color = Color(0.0076315, 0.0114208, 0.0182263, 1)
@@ -29,27 +27,11 @@ height = 2.49232
 [node name="environment" type="Node3D" parent="."]
 
 [node name="floor" type="CSGBox3D" parent="environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.76993, -0.5, 3.75549)
 use_collision = true
-size = Vector3(20, 1, 20)
+size = Vector3(51.7393, 1, 97.2249)
 
 [node name="lighting" type="Node3D" parent="environment"]
-
-[node name="lampPost" type="Node3D" parent="environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.09179)
-
-[node name="post" type="CSGBox3D" parent="environment/lampPost"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32415, 0)
-use_collision = true
-size = Vector3(0.480957, 2.66406, 0.476074)
-material = SubResource("StandardMaterial3D_y0sk7")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="environment/lampPost"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81323, 0)
-light_bake_mode = 1
-shadow_enabled = true
-shadow_reverse_cull_face = true
-omni_range = 11.1242
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="environment"]
 environment = SubResource("Environment_wsmmc")
@@ -61,6 +43,14 @@ script = ExtResource("1_ngg5l")
 [node name="playerCamera" type="Camera3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01344, 0)
 
+[node name="flashlight" type="SpotLight3D" parent="player/playerCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0414076, 0)
+spot_range = 18.4574
+spot_angle = 33.8645
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29096, 0)
 shape = SubResource("CapsuleShape3D_t8top")
+
+[node name="Lamp" parent="." instance=ExtResource("2_ol827")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40896, 0, -7.56147)

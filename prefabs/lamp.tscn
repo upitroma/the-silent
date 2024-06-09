@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb8f8larc7wjw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovks0"]
+albedo_color = Color(0.151276, 0.151276, 0.151276, 1)
+metallic = 0.45
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gevjo"]
+albedo_color = Color(0.980727, 0.8343, 0.493666, 1)
+emission_enabled = true
+emission = Color(0.768137, 0.637147, 0.331466, 1)
+emission_energy_multiplier = 1.51
+
+[node name="Lamp" type="Node3D"]
+
+[node name="post" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72841, 0)
+size = Vector3(0.3, 3.48, 0.3)
+material = SubResource("StandardMaterial3D_ovks0")
+
+[node name="bulb" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.70688, 0)
+size = Vector3(0.5, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_gevjo")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88631, 0)
+omni_range = 11.9179

@@ -1,5 +1,5 @@
 extends CharacterBody3D
-@export var speed = 10
+@export var speed = 5
 @export var jump_velocity = 4.5
 @export var mouse_sensitivity = .002
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -14,8 +14,10 @@ func _physics_process(delta):
 	else: velocity_y -= gravity * delta
 	velocity.y = velocity_y
 	move_and_slide()
+	if Input.is_action_just_pressed("click"):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Input.is_action_just_pressed("ui_cancel"): 
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE else Input.MOUSE_MODE_VISIBLE
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
