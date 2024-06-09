@@ -10,7 +10,7 @@ func _physics_process(delta):
 	var horizontal_velocity = Input.get_vector("move_left","move_right","move_forward","move_back").normalized() * speed
 	velocity = horizontal_velocity.x * global_transform.basis.x + horizontal_velocity.y * global_transform.basis.z
 	if is_on_floor():
-		velocity_y = jump_velocity if Input.is_action_just_pressed("jump") else 0
+		velocity_y = 0
 	else: velocity_y -= gravity * delta
 	velocity.y = velocity_y
 	move_and_slide()

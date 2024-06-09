@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://becibbnb3chm1"]
+[gd_scene load_steps=15 format=3 uid="uid://becibbnb3chm1"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ngg5l"]
 [ext_resource type="AudioStream" uid="uid://bmqsteeymaqvd" path="res://assets/rain.mp3" id="1_uvn73"]
 [ext_resource type="PackedScene" uid="uid://bb8f8larc7wjw" path="res://prefabs/lamp.tscn" id="2_ol827"]
 [ext_resource type="Texture2D" uid="uid://kimvlst7iuv" path="res://assets/particleCircle.png" id="2_rt6w6"]
+[ext_resource type="Script" path="res://scenes/silentArea.gd" id="5_swunu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_paptp"]
 sky_top_color = Color(0.0076315, 0.0114208, 0.0182263, 1)
@@ -26,7 +27,7 @@ emission_shape = 3
 emission_box_extents = Vector3(30, 2, 50)
 direction = Vector3(0, -1, 0)
 spread = 0.0
-initial_velocity_min = 50.0
+initial_velocity_min = 40.0
 initial_velocity_max = 50.0
 
 [sub_resource type="Curve" id="Curve_0ftd4"]
@@ -38,21 +39,25 @@ metadata/_snap_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sybox"]
 transparency = 1
 cull_mode = 2
-shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.32549, 0.32549, 0.32549, 0.470588)
+albedo_color = Color(0.827451, 0.827451, 0.827451, 0.113725)
 albedo_texture = ExtResource("2_rt6w6")
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_xdq0q"]
 material = SubResource("StandardMaterial3D_sybox")
 shape = 0
 size = 0.5
+sections = 2
 section_length = 0.5
 curve = SubResource("Curve_0ftd4")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t8top"]
 radius = 0.384128
 height = 2.49232
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qu1x4"]
+height = 11.0034
+radius = 6.28297
 
 [node name="world" type="Node3D"]
 
@@ -79,12 +84,13 @@ stream = ExtResource("1_uvn73")
 volume_db = -10.306
 autoplay = true
 mix_target = 1
+bus = &"Rain"
 
 [node name="rainParticles" type="GPUParticles3D" parent="environment/rain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.68573, 6.5888, 6.48214)
 cast_shadow = 0
 gi_mode = 0
-amount = 1000
+amount = 20000
 randomness = 0.88
 visibility_aabb = AABB(-19.7813, -9.52063, -37.9106, 39.5627, 19.0413, 75.8213)
 process_material = SubResource("ParticleProcessMaterial_rqjgd")
@@ -101,7 +107,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.70213, 0, 33.462)
 [node name="Lamp3" parent="environment/lamps" instance=ExtResource("2_ol827")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3872, 0, 21.7085)
 
-[node name="player" type="CharacterBody3D" parent="."]
+[node name="player" type="CharacterBody3D" parent="." groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.699193, 0)
 script = ExtResource("1_ngg5l")
 
@@ -110,9 +116,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01344, 0)
 
 [node name="flashlight" type="SpotLight3D" parent="player/playerCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0414076, 0)
-spot_range = 18.4574
-spot_angle = 33.8645
+light_energy = 1.989
+spot_range = 60.0152
+spot_angle = 42.8042
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29096, 0)
 shape = SubResource("CapsuleShape3D_t8top")
+
+[node name="silentArea" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5274, 9.53674e-07, -0.853908)
+script = ExtResource("5_swunu")
+rainAudioStreamPlayerNodePath = NodePath("../environment/rain/ambientRain")
+
+[node name="decal" type="Sprite3D" parent="silentArea"]
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -1, 0, 5, -4.37114e-08, 0, 0.0259854, 0)
+cast_shadow = 0
+gi_mode = 2
+modulate = Color(0.254322, 2.60267e-05, 0.236046, 1)
+shaded = true
+texture = ExtResource("2_rt6w6")
+
+[node name="Area3D" type="Area3D" parent="silentArea"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="silentArea/Area3D"]
+shape = SubResource("CylinderShape3D_qu1x4")
+
+[connection signal="body_shape_entered" from="silentArea/Area3D" to="silentArea" method="_on_area_3d_body_shape_entered"]
+[connection signal="body_shape_exited" from="silentArea/Area3D" to="silentArea" method="_on_area_3d_body_shape_exited"]
