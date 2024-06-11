@@ -1,10 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://becibbnb3chm1"]
+[gd_scene load_steps=17 format=3 uid="uid://becibbnb3chm1"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ngg5l"]
 [ext_resource type="AudioStream" uid="uid://bmqsteeymaqvd" path="res://assets/rain.mp3" id="1_uvn73"]
 [ext_resource type="PackedScene" uid="uid://bb8f8larc7wjw" path="res://prefabs/lamp.tscn" id="2_ol827"]
 [ext_resource type="Texture2D" uid="uid://kimvlst7iuv" path="res://assets/particleCircle.png" id="2_rt6w6"]
+[ext_resource type="AudioStream" uid="uid://b7sb6jwstnlaj" path="res://assets/walkingDirt.mp3" id="5_e283y"]
 [ext_resource type="Script" path="res://scenes/silentArea.gd" id="5_swunu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfm7n"]
+albedo_color = Color(0.080106, 0.0828542, 0.00359049, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_paptp"]
 sky_top_color = Color(0.0076315, 0.0114208, 0.0182263, 1)
@@ -67,6 +71,7 @@ radius = 6.28297
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.76993, -0.5, 3.75549)
 use_collision = true
 size = Vector3(51.7393, 1, 97.2249)
+material = SubResource("StandardMaterial3D_yfm7n")
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="environment/floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.285, 0, -0.0610001)
@@ -81,7 +86,7 @@ environment = SubResource("Environment_wsmmc")
 
 [node name="ambientRain" type="AudioStreamPlayer" parent="environment/rain"]
 stream = ExtResource("1_uvn73")
-volume_db = -10.306
+volume_db = 3.831
 autoplay = true
 mix_target = 1
 bus = &"Rain"
@@ -110,19 +115,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3872, 0, 21.7085)
 [node name="player" type="CharacterBody3D" parent="." groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.699193, 0)
 script = ExtResource("1_ngg5l")
+footstepsAudioPlayerPath = NodePath("footsteps")
 
 [node name="playerCamera" type="Camera3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01344, 0)
 
 [node name="flashlight" type="SpotLight3D" parent="player/playerCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0414076, 0)
-light_energy = 1.989
+light_energy = 3.337
 spot_range = 60.0152
 spot_angle = 42.8042
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29096, 0)
 shape = SubResource("CapsuleShape3D_t8top")
+
+[node name="footsteps" type="AudioStreamPlayer" parent="player"]
+stream = ExtResource("5_e283y")
+volume_db = 5.474
 
 [node name="silentArea" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5274, 9.53674e-07, -0.853908)

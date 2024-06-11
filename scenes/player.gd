@@ -5,6 +5,11 @@ extends CharacterBody3D
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var velocity_y = 0
 
+
+@export var footstepsAudioPlayerPath: NodePath
+@onready var footstepsAudioPlayer: AudioStreamPlayer = get_node(footstepsAudioPlayerPath)
+
+
 @onready var camera:Camera3D = $playerCamera
 func _physics_process(delta):
 	var horizontal_velocity = Input.get_vector("move_left","move_right","move_forward","move_back").normalized() * speed
@@ -18,6 +23,13 @@ func _physics_process(delta):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Input.is_action_just_pressed("ui_cancel"): 
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
+	# footsteps
+	if horizontal_velocity.length() != 0 and not footstepsAudioPlayer.playing:
+		print("playing footsteps")
+		footstepsAudioPlayer.play()
+	elif horizontal_velocity.length() == 0 and footstepsAudioPlayer.playing:
+		footstepsAudioPlayer.stop()
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
