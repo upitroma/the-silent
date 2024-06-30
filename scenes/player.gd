@@ -26,7 +26,6 @@ func _physics_process(delta):
 		
 	# footsteps
 	if horizontal_velocity.length() != 0 and not footstepsAudioPlayer.playing:
-		print("playing footsteps")
 		footstepsAudioPlayer.play()
 	elif horizontal_velocity.length() == 0 and footstepsAudioPlayer.playing:
 		footstepsAudioPlayer.stop()

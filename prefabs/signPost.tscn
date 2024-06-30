@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dedlm22ccp3qq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7txdp"]
+albedo_color = Color(0.255174, 0, 0.0054987, 1)
+
+[node name="Label3D" type="Label3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32112, 0)
+modulate = Color(1, 0, 0, 1)
+text = "asd"
+outline_size = 1
+autowrap_mode = 3
+
+[node name="sign" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.039226, -0.151637)
+size = Vector3(1.6, 1, 0.3)
+material = SubResource("StandardMaterial3D_7txdp")
+
+[node name="post" type="CSGBox3D" parent="sign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.937566, 0)
+size = Vector3(0.2, 0.87, 0.2)
+material = SubResource("StandardMaterial3D_7txdp")
