@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://becibbnb3chm1"]
+[gd_scene load_steps=21 format=3 uid="uid://becibbnb3chm1"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_ngg5l"]
 [ext_resource type="AudioStream" uid="uid://bmqsteeymaqvd" path="res://assets/rain.mp3" id="1_uvn73"]
 [ext_resource type="PackedScene" uid="uid://bb8f8larc7wjw" path="res://prefabs/lamp.tscn" id="2_ol827"]
 [ext_resource type="Texture2D" uid="uid://kimvlst7iuv" path="res://assets/particleCircle.png" id="2_rt6w6"]
+[ext_resource type="PackedScene" uid="uid://b2hi5qrloole0" path="res://prefabs/rock.tscn" id="3_ti5p3"]
 [ext_resource type="PackedScene" uid="uid://dedlm22ccp3qq" path="res://prefabs/signPost.tscn" id="4_t4ilx"]
 [ext_resource type="AudioStream" uid="uid://b7sb6jwstnlaj" path="res://assets/walkingDirt.mp3" id="5_e283y"]
 [ext_resource type="Script" path="res://scenes/silentArea.gd" id="5_swunu"]
@@ -81,7 +82,7 @@ _data = {
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qu1x4"]
-height = 11.0034
+height = 7.24326
 radius = 6.28297
 
 [node name="world" type="Node3D"]
@@ -94,10 +95,6 @@ use_collision = true
 size = Vector3(255.094, 1, 339.41)
 material = SubResource("StandardMaterial3D_yfm7n")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="environment/floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.285, 0, -0.0610001)
-size = Vector3(50.99, 1, 98.66)
-
 [node name="lighting" type="Node3D" parent="environment"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="environment"]
@@ -106,13 +103,25 @@ environment = SubResource("Environment_wsmmc")
 [node name="lamps" type="Node3D" parent="environment"]
 
 [node name="Lamp" parent="environment/lamps" instance=ExtResource("2_ol827")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40896, 0, -7.56147)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46081, 0, 3.85196)
 
 [node name="Lamp2" parent="environment/lamps" instance=ExtResource("2_ol827")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.70213, 0, 33.462)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.8562, 0, 49.5674)
 
 [node name="Lamp3" parent="environment/lamps" instance=ExtResource("2_ol827")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3872, 0, 21.7085)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.8138, 0, 98.8066)
+
+[node name="Lamp4" parent="environment/lamps" instance=ExtResource("2_ol827")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89184, 0, 166.747)
+
+[node name="Lamp5" parent="environment/lamps" instance=ExtResource("2_ol827")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89184, 0, 166.747)
+
+[node name="Lamp6" parent="environment/lamps" instance=ExtResource("2_ol827")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.7812, 0, 91.7387)
+
+[node name="Lamp7" parent="environment/lamps" instance=ExtResource("2_ol827")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -108.623, -7.62939e-06, 163.438)
 
 [node name="signPosts" type="Node3D" parent="environment"]
 
@@ -121,8 +130,96 @@ transform = Transform3D(0.988478, 0, 0.151364, 0, 1, 0, -0.151364, 0, 0.988478, 
 text = "Follow the lights
 and you will be safe"
 
+[node name="rocks" type="Node3D" parent="environment"]
+
+[node name="Rock" parent="environment/rocks" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(1.51378, -0.903732, 0, 1.41187, 0.968965, 0, 0, 0, 1.675, 0, 0.778744, 5.07787)
+
+[node name="Rock2" parent="environment/rocks" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(1.93842, -0.464869, 0, 0.668501, 1.14211, -0.654555, 0.283803, 0.484869, 1.54181, 18.2788, 0.778744, -19.7216)
+
+[node name="boundry" type="Node3D" parent="environment/rocks"]
+
+[node name="Rock3" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(29.882, -5.8403, -8.9685e-08, 10.3054, 14.3487, -2.80211, 4.37501, 6.09156, 6.6004, -15.3281, 0.778744, -95.3984)
+
+[node name="Rock8" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(21.8928, -8.284, -3.80553, 10.3054, 14.3487, -2.80211, 20.8034, 1.60985, 5.39289, 10.8903, 0.778744, 72.5573)
+
+[node name="Rock9" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(20.3388, -12.7537, 0.589832, 23.7647, 9.7395, -2.30187, 6.31254, 4.42572, 6.7654, -28.6564, 0.778729, 64.3579)
+
+[node name="Rock10" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-3.99382, -15.4956, -2.46129, 31.2785, -1.04043, -1.34738, 4.89697, -5.99217, 6.59877, -63.7301, 0.778729, 64.3579)
+
+[node name="Rock11" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-18.1972, -13.1976, -1.54186, 24.9852, -7.41443, -3.11368, 7.92952, -6.92463, 6.27254, -102.335, 0.778736, 50.8135)
+
+[node name="Rock12" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(0.415142, -11.4225, 5.21522, 24.9852, -7.41443, -3.11368, 19.8455, 9.5736, 3.81098, -123.492, 0.778736, 71.5831)
+
+[node name="Rock13" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-5.16984, 0.956293, 7.06384, 26.9938, -8.42214, 1.20913, 16.2137, 14.3267, 0.239303, -126.809, 0.778736, 112.069)
+
+[node name="Rock14" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-5.16984, 0.956293, 7.06384, 26.9938, -8.42214, 1.20913, 16.2137, 14.3267, 0.239303, 13.1528, 0.778736, 119.028)
+
+[node name="Rock15" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-5.16984, 0.956293, 7.06384, 26.9938, -8.42214, 1.20913, 16.2137, 14.3267, 0.239303, -63.9386, 0.778736, 142.916)
+
+[node name="Rock16" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-5.16984, 0.956293, 7.06384, 26.9938, -8.42214, 1.20913, 16.2137, 14.3267, 0.239303, -130.229, 0.778736, 164.059)
+
+[node name="Rock17" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-16.8311, -13.9903, 0.891437, 26.9938, -8.42214, 1.20913, -2.51518, 3.23114, 7.01145, -91.2675, 0.778736, 193.549)
+
+[node name="Rock18" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-16.8311, -13.9903, 0.891437, 26.9938, -8.42214, 1.20913, -2.51518, 3.23114, 7.01145, -33.2625, 0.778736, 211.544)
+
+[node name="Rock19" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-16.8311, -13.9903, 0.891437, 26.9938, -8.42214, 1.20913, -2.51518, 3.23114, 7.01145, 32.6539, 0.778736, 211.918)
+
+[node name="Rock20" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-16.8311, -13.9903, 0.891437, 26.9938, -8.42214, 1.20913, -2.51518, 3.23114, 7.01145, 32.6539, 0.778736, 211.918)
+
+[node name="Rock21" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-13.9965, -7.99329, 5.44698, 26.9938, -8.42214, 1.20913, 9.68038, 11.928, 4.50394, 79.655, 0.778736, 182.833)
+
+[node name="Rock22" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-3.22333, 2.63778, 7.04283, 26.9938, -8.42214, 1.20913, 16.7099, 14.1142, -0.594712, 98.6512, 0.778736, 121.919)
+
+[node name="Rock23" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-3.22333, 2.63778, 7.04283, 26.9938, -8.42214, 1.20913, 16.7099, 14.1142, -0.594712, 98.2315, 0.778736, 58.9843)
+
+[node name="Rock24" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-3.22333, 2.63778, 7.04283, 26.9938, -8.42214, 1.20913, 16.7099, 14.1142, -0.594712, 98.7755, 0.778736, -22.5555)
+
+[node name="Rock25" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(9.80142, 11.9969, 4.45652, 26.9938, -8.42214, 1.20913, 13.912, 7.88952, -5.48585, 73.2227, 0.778736, -55.6269)
+
+[node name="Rock26" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-5.46609, 0.693597, 7.05827, 26.9938, -8.42214, 1.20913, 16.1163, 14.3418, 0.368707, -102.976, 0.778736, -33.3739)
+
+[node name="Rock27" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-5.46609, 0.693597, 7.05827, 26.9938, -8.42214, 1.20913, 16.1163, 14.3418, 0.368707, -106.183, 0.778736, 16.4155)
+
+[node name="Rock28" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(-5.46609, 0.693597, 7.05827, 26.9938, -8.42214, 1.20913, 16.1163, 14.3418, 0.368707, -106.183, 0.778736, 16.4155)
+
+[node name="Rock5" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(20.6237, -12.2727, 1.41142, 23.8467, 11.0482, 0.231073, -4.92693, 2.10192, 7.02649, -59.2764, 0.778744, -95.5104)
+
+[node name="Rock6" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(9.82638, -6.47346, 6.22621, 23.8467, 11.0482, 0.231073, -18.7897, 10.6364, 3.54936, -90.6528, -6.4859, -70.2085)
+
+[node name="Rock4" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(13.548, 4.10703, -2.2623, -6.1851, 10.47, -2.37847, 2.06134, 4.42237, 7.73207, 24.3044, 0.77874, -93.8122)
+
+[node name="Rock7" parent="environment/rocks/boundry" instance=ExtResource("3_ti5p3")]
+transform = Transform3D(9.79301, 0.750745, -6.35236, 7.11603, 9.01209, 3.93888, 8.91688, -8.01655, 3.83312, 38.3904, 0.77874, -72.9001)
+
 [node name="player" type="CharacterBody3D" parent="." groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.699193, 0)
+transform = Transform3D(-0.975002, 0, -0.222195, 0, 1, 0, 0.222195, 0, -0.975002, 0.951241, 0.699193, -1.23766)
 script = ExtResource("1_ngg5l")
 footstepsAudioPlayerPath = NodePath("footsteps")
 
@@ -131,8 +228,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01344, 0)
 
 [node name="flashlight" type="SpotLight3D" parent="player/playerCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0414076, 0)
-light_energy = 3.337
-spot_range = 60.0152
+light_energy = 10.303
+spot_range = 74.1729
 spot_angle = 42.8042
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
@@ -169,19 +266,20 @@ libraries = {
 }
 
 [node name="silentArea" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5274, 9.53674e-07, -0.853908)
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -21.5274, 9.53674e-07, -0.853908)
 script = ExtResource("5_swunu")
 soundDistortionPath = NodePath("../player/rain/soundDistortion")
 
 [node name="decal" type="Sprite3D" parent="silentArea"]
-transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -1, 0, 5, -4.37114e-08, 0, 0.0259854, 0)
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, 1, 0, -5, -4.37114e-08, 0, 0.01, 0)
 cast_shadow = 0
 gi_mode = 2
-modulate = Color(0.254322, 2.60267e-05, 0.236046, 1)
-shaded = true
+modulate = Color(0, 0, 0, 1)
+double_sided = false
 texture = ExtResource("2_rt6w6")
 
 [node name="Area3D" type="Area3D" parent="silentArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58264, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="silentArea/Area3D"]
 shape = SubResource("CylinderShape3D_qu1x4")

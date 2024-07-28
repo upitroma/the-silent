@@ -14,15 +14,21 @@ emission_energy_multiplier = 1.51
 
 [node name="post" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72841, 0)
+layers = 2
+cast_shadow = 0
 size = Vector3(0.3, 3.48, 0.3)
 material = SubResource("StandardMaterial3D_ovks0")
 
 [node name="bulb" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.70688, 0)
+layers = 2
 size = Vector3(0.5, 0.5, 0.5)
 material = SubResource("StandardMaterial3D_gevjo")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88631, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.515, 0)
+layers = 2
 light_energy = 2.438
+light_bake_mode = 1
+light_cull_mask = 4294967289
 omni_range = 16.052

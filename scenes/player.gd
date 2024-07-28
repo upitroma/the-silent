@@ -1,5 +1,6 @@
 extends CharacterBody3D
-@export var speed = 5
+@export var walkSpeed = 5
+@export var sprintSpeed = 15
 @export var jump_velocity = 4.5
 @export var mouse_sensitivity = .002
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -12,13 +13,27 @@ var velocity_y = 0
 
 @onready var camera:Camera3D = $playerCamera
 func _physics_process(delta):
-	var horizontal_velocity = Input.get_vector("move_left","move_right","move_forward","move_back").normalized() * speed
+	var horizontal_velocity_direction = Input.get_vector("move_left","move_right","move_forward","move_back").normalized()
+	
+	# if sprinting
+	var speed = 0
+	if Input.is_action_pressed("sprint"):
+		speed = sprintSpeed
+	else:
+		speed = walkSpeed
+	
+	var horizontal_velocity = horizontal_velocity_direction * speed
+	
+	
 	velocity = horizontal_velocity.x * global_transform.basis.x + horizontal_velocity.y * global_transform.basis.z
 	if is_on_floor():
 		velocity_y = 0
 	else: velocity_y -= gravity * delta
 	velocity.y = velocity_y
 	move_and_slide()
+	
+	
+	# game window focus
 	if Input.is_action_just_pressed("click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Input.is_action_just_pressed("ui_cancel"): 
